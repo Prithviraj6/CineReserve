@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { filter } from 'rxjs/operators';
 
+import { SidebarService } from './services/sidebar.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,7 +17,7 @@ export class App {
   title = 'CineReserveFrontend';
   hideSidebar = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public sidebarService: SidebarService) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {

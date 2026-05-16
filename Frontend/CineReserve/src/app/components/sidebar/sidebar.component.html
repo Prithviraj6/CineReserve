@@ -1,47 +1,60 @@
-<div class="sidebar d-flex flex-column bg-white border-end h-100 shadow-sm">
-  <div class="p-4 border-bottom d-none d-lg-block">
-    <a routerLink="/" class="navbar-brand fw-bold text-primary fs-4">
-      <i class="bi bi-ticket-perforated-fill me-2"></i>CineReserve
+<div class="sidebar d-flex flex-column bg-white border-end h-100 shadow-sm" [class.collapsed]="sidebarService.isCollapsed$ | async">
+  <div class="p-4 border-bottom d-flex align-items-center justify-content-between header-container">
+    <a routerLink="/" class="navbar-brand fw-bold text-white fs-4 text-truncate">
+      <i class="bi bi-ticket-perforated-fill me-2 text-primary"></i><span class="logo-text">CineReserve</span>
     </a>
+    <button class="btn btn-link text-muted p-0 toggle-btn" (click)="toggleSidebar()">
+      <i class="bi" [ngClass]="(sidebarService.isCollapsed$ | async) ? 'bi-layout-sidebar-inset' : 'bi-layout-sidebar'"></i>
+    </button>
   </div>
   
   <div class="sidebar-content flex-grow-1 p-3 mt-3">
     <div class="nav flex-column gap-2">
-      <a routerLink="/" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <i class="bi bi-house-door-fill me-3"></i> Home
-      </a>
-      <a routerLink="/movies" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active">
-        <i class="bi bi-film me-3"></i> Explore Movies
-      </a>
-      
-      <a routerLink="/admin" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" *ngIf="authService.isAdmin">
-        <i class="bi bi-shield-lock me-3"></i> Admin Panel
-      </a>
-      
-      <div class="mt-4 mb-2 ms-3 text-uppercase small fw-bold text-muted" *ngIf="user$ | async">Your Account</div>
-      
-      <a routerLink="/dashboard" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" *ngIf="user$ | async">
-        <i class="bi bi-grid-fill me-3"></i> Dashboard
-      </a>
-      <a routerLink="/profile" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" *ngIf="user$ | async">
-        <i class="bi bi-person-fill me-3"></i> Profile
-      </a>
+      <!-- Admin Only Links -->
+      <ng-container *ngIf="authService.isAdmin">
+        <div class="ms-3 text-uppercase extra-small fw-bold text-muted mb-2 section-title">Management</div>
+        <a routerLink="/admin" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" title="Admin Dashboard">
+          <i class="bi bi-shield-lock-fill me-3"></i> <span class="nav-text">Admin Dashboard</span>
+        </a>
+        <a routerLink="/movies" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" title="View Site">
+          <i class="bi bi-eye-fill me-3"></i> <span class="nav-text">View Site</span>
+        </a>
+      </ng-container>
+
+      <!-- User Only Links -->
+      <ng-container *ngIf="!authService.isAdmin">
+        <a routerLink="/" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" title="Home">
+          <i class="bi bi-house-door-fill me-3"></i> <span class="nav-text">Home</span>
+        </a>
+        <a routerLink="/movies" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" title="Explore Movies">
+          <i class="bi bi-film me-3"></i> <span class="nav-text">Explore Movies</span>
+        </a>
+        
+        <div class="mt-4 mb-2 ms-3 text-uppercase small fw-bold text-muted section-title" *ngIf="user$ | async">Your Account</div>
+        
+        <a routerLink="/dashboard" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" *ngIf="user$ | async" title="Dashboard">
+          <i class="bi bi-grid-fill me-3"></i> <span class="nav-text">Dashboard</span>
+        </a>
+        <a routerLink="/profile" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" *ngIf="user$ | async" title="Profile">
+          <i class="bi bi-person-fill me-3"></i> <span class="nav-text">Profile</span>
+        </a>
+      </ng-container>
     </div>
   </div>
 
   <div class="p-4 border-top" *ngIf="user$ | async as user">
     <div class="d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center gap-3">
-        <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+        <div class="avatar-circle d-flex align-items-center justify-content-center flex-shrink-0">
           {{ user.fullName.charAt(0) }}
         </div>
-        <div class="overflow-hidden">
-          <p class="mb-0 fw-bold small text-truncate">{{ user.fullName }}</p>
+        <div class="user-info-text overflow-hidden">
+          <p class="mb-0 fw-bold small text-dark">{{ user.fullName }}</p>
           <p class="mb-0 text-muted extra-small">Member Since 2026</p>
         </div>
       </div>
-      <button class="btn btn-link text-danger p-0" (click)="logout()" title="Logout">
-        <i class="bi bi-box-arrow-right fs-5"></i>
+      <button class="btn btn-link text-danger p-0 logout-icon-btn" (click)="logout()" title="Logout">
+        <i class="bi bi-box-arrow-right fs-4"></i>
       </button>
     </div>
   </div>

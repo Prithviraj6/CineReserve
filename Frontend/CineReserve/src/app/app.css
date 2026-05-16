@@ -1,9 +1,33 @@
 .ps-sidebar {
   padding-left: 280px;
+  transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-hidden {
+  padding-left: 0 !important;
+}
+
+.floating-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1050;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.floating-toggle:hover {
+  background: #f8f9fa;
+  transform: scale(1.05);
 }
 
 @media (max-width: 991.98px) {
   .ps-sidebar {
-    padding-left: 80px;
+    padding-left: 0;
   }
 }

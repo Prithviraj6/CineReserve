@@ -1,9 +1,19 @@
-<div class="d-flex min-vh-100 bg-light">
+<div class="d-flex min-vh-100 bg-light position-relative">
   <!-- Sidebar (Hidden on Landing/Auth) -->
   <app-sidebar class="d-none d-md-block" *ngIf="!hideSidebar"></app-sidebar>
 
+  <!-- Floating Toggle Button (Visible when sidebar is hidden) -->
+  <button class="btn btn-white shadow-sm border rounded-3 floating-toggle" 
+          *ngIf="(sidebarService.isCollapsed$ | async) && !hideSidebar"
+          (click)="sidebarService.toggle()"
+          title="Show Sidebar">
+    <i class="bi bi-list fs-4"></i>
+  </button>
+
   <!-- Main Content Area -->
-  <div class="flex-grow-1 d-flex flex-column overflow-hidden" [class.ps-sidebar]="!hideSidebar">
+  <div class="flex-grow-1 d-flex flex-column overflow-hidden" 
+       [class.ps-sidebar]="!hideSidebar"
+       [class.sidebar-hidden]="(sidebarService.isCollapsed$ | async) && !hideSidebar">
     <!-- Page Content -->
     <main class="flex-grow-1 overflow-auto">
       <router-outlet></router-outlet>

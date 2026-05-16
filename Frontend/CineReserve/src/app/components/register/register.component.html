@@ -14,13 +14,17 @@
             
             <div *ngIf="error" class="alert alert-danger small border-0 py-2">{{ error }}</div>
 
-            <form (ngSubmit)="onSubmit()">
+            <form (ngSubmit)="registerForm.form.valid && onSubmit()" #registerForm="ngForm">
               <div class="mb-3">
                 <label class="form-label fw-medium small text-uppercase">Full Name</label>
                 <div class="input-group">
                   <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
                   <input type="text" class="form-control bg-light border-start-0" 
-                         [(ngModel)]="fullName" name="fullName" required placeholder="John Doe">
+                         [(ngModel)]="fullName" name="fullName" #nameModel="ngModel"
+                         required minlength="3" placeholder="John Doe">
+                </div>
+                <div *ngIf="nameModel.invalid && (nameModel.dirty || nameModel.touched)" class="extra-small text-danger mt-1 ms-1">
+                  Name must be at least 3 characters.
                 </div>
               </div>
 
@@ -29,7 +33,11 @@
                 <div class="input-group">
                   <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
                   <input type="email" class="form-control bg-light border-start-0" 
-                         [(ngModel)]="email" name="email" required placeholder="name@example.com">
+                         [(ngModel)]="email" name="email" #emailModel="ngModel"
+                         required email placeholder="name@example.com">
+                </div>
+                <div *ngIf="emailModel.invalid && (emailModel.dirty || emailModel.touched)" class="extra-small text-danger mt-1 ms-1">
+                  Please enter a valid email address.
                 </div>
               </div>
               
@@ -38,14 +46,19 @@
                 <div class="input-group">
                   <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-muted"></i></span>
                   <input [type]="showPassword ? 'text' : 'password'" class="form-control bg-light border-start-0 border-end-0" 
-                         [(ngModel)]="password" name="password" required placeholder="Min 6 characters">
+                         [(ngModel)]="password" name="password" #passModel="ngModel"
+                         required minlength="6" placeholder="Min 6 characters">
                   <button class="input-group-text bg-light border-start-0" type="button" (click)="showPassword = !showPassword">
                     <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
                   </button>
                 </div>
+                <div *ngIf="passModel.invalid && (passModel.dirty || passModel.touched)" class="extra-small text-danger mt-1 ms-1">
+                  Password must be at least 6 characters.
+                </div>
               </div>
               
-              <button type="submit" class="btn btn-primary w-100 py-3 fw-bold shadow-sm mb-4" [disabled]="loading">
+              <button type="submit" class="btn btn-primary w-100 py-3 fw-bold shadow-sm mb-4" 
+                      [disabled]="loading || registerForm.invalid">
                 {{ loading ? 'Creating Account...' : 'Sign Up' }}
               </button>
 
