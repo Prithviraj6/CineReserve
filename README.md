@@ -1,6 +1,4 @@
 <div align="center">
-  <img src="./cinereserve_banner.png" alt="CineReserve Banner" width="800" onerror="this.style.display='none'"/>
-  
   <h1>🎬 CineReserve</h1>
   <p><b>Experience Cinema Like Never Before.</b></p>
   <p>A premium, real-time movie ticket booking platform.</p>
