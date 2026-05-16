@@ -1,79 +1,126 @@
 # 🎬 CineReserve
 
-![CineReserve Banner](file:///C:/Users/patil/.gemini/antigravity/brain/cd347397-43dd-4c10-ae63-5d41725ea00a/cinereserve_banner_1778921052073.png)
-
-### **Experience Cinema Like Never Before.**
-
-CineReserve is a premium, real-time movie ticket booking platform designed for a seamless and visually stunning user experience. Built with a robust **.NET 8 API** and a modern **Angular 18** frontend, it offers high-performance seat selection, real-time booking, and a comprehensive administrative suite.
-
----
-
-## 🚀 Key Features
-
-- 🎟️ **Real-Time Booking**: Seamless ticket reservation with instant confirmation.
-- 💺 **Visual Seat Mapping**: High-fidelity, interactive theater layouts for precise seat selection.
-- 📊 **Admin Power-Hub**: Sophisticated dashboard for managing movies, schedules, and analytics.
-- 💳 **Integrated Wallet**: Secure top-up system for quick, one-click payments.
-- 🔐 **Secure Auth**: Industry-standard JWT authentication for total user data protection.
-- 📱 **Responsive Design**: Premium, high-contrast UI that looks stunning on every device.
+<div align="center">
+  <img src="./cinereserve_banner.png" alt="CineReserve Banner" width="800" onerror="this.style.display='none'"/>
+  <h3><strong>Experience Cinema Like Never Before.</strong></h3>
+  <p>A premium, real-time movie ticket booking platform.</p>
+</div>
 
 ---
 
-## 🛠️ Technology Stack
+## 🏆 Hackathon Project Overview
 
-### **Frontend**
-![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![RxJS](https://img.shields.io/badge/rxjs-%23B7178C.svg?style=for-the-badge&logo=reactivex&logoColor=white)
+**CineReserve** was developed as a comprehensive solution for modernizing the cinema ticketing experience. Built during a fast-paced hackathon, this project demonstrates full-stack engineering capabilities, clean architecture principles, and premium UI/UX design. 
 
-### **Backend**
-![.Net](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white)
-![SQL Server](https://img.shields.io/badge/sql%20server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
-![Entity Framework](https://img.shields.io/badge/EF%20Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+Our goal was to solve the common issues in existing ticketing systems: high latency during peak booking times, poor visual representation of seating, and disjointed admin management. CineReserve delivers a responsive, real-time, and visually stunning platform that caters to both cinema-goers and theater administrators.
 
 ---
 
-## ⚙️ Getting Started
+## 🚀 Key Features & Impact
+
+- 🎟️ **Real-Time Booking Engine**: High-performance, concurrent ticket reservation system preventing double-booking through robust backend transaction handling.
+- 💺 **Interactive Visual Seat Mapping**: High-fidelity, dynamic theater layouts built in Angular, allowing precise and intuitive seat selection.
+- 📊 **Comprehensive Admin Power-Hub**: A dedicated administrative dashboard for managing movies, screening schedules, and monitoring analytics.
+- 💳 **Integrated Wallet System**: Secure, simulated top-up wallet system enabling one-click, seamless payments.
+- 🔐 **Secure Authentication**: Industry-standard JWT (JSON Web Tokens) authentication ensuring data protection and role-based access control (RBAC).
+- 📱 **Responsive & Premium Design**: Custom-crafted, high-contrast UI tailored for modern devices, avoiding generic templates to deliver a "WOW" factor.
+
+---
+
+## 🏗️ Architecture & Technology Stack
+
+CineReserve is built using a highly scalable and decoupled architecture, separating concerns between the client and server.
+
+### **Frontend** (Angular 18)
+- **Framework**: Angular 18 (Standalone Components)
+- **Language**: TypeScript
+- **State Management & Reactivity**: RxJS, Signals
+- **Styling**: Custom CSS / Bootstrap for grid layouts
+
+### **Backend** (.NET 8 Clean Architecture)
+- **Framework**: ASP.NET Core Web API (.NET 8)
+- **Language**: C#
+- **Database**: SQL Server
+- **ORM**: Entity Framework Core
+- **Design Pattern**: Clean / Layered Architecture, Repository Pattern, Dependency Injection
+
+---
+
+## 📂 Project Folder Structure
+
+The repository is divided into two main applications: Frontend and Backend.
+
+```text
+CineReserve/
+├── Backend/                            # .NET 8 Backend Solution
+│   └── CineReserve/
+│       ├── CineReserve.API/            # Presentation Layer: Controllers, Middlewares, Program.cs
+│       ├── CineReserve.Application/    # Business Logic Layer: Services, DTOs, Mapping Profiles
+│       ├── CineReserve.Domain/         # Core Layer: Entities, Models, Enums
+│       ├── CineReserve.Infrastruture/  # Data Layer: EF Core DbContext, Migrations, Repositories
+│       └── CineReserve.Tests/          # Unit and Integration Tests
+│
+├── Frontend/                           # Angular 18 Frontend Application
+│   └── CineReserve/
+│       ├── src/
+│       │   ├── app/
+│       │   │   ├── components/         # UI Components (Admin, Dashboard, Home, Movie, etc.)
+│       │   │   ├── interceptors/       # HTTP Interceptors (JWT attaching, Error handling)
+│       │   │   ├── models/             # TypeScript Interfaces and Types
+│       │   │   └── services/           # Angular Services (API integration, Auth, State)
+│       │   ├── assets/                 # Static assets (images, icons)
+│       │   └── index.html              # Main HTML entry point
+│       ├── angular.json                # Angular configuration
+│       └── package.json                # Node.js dependencies
+│
+└── README.md                           # Project Documentation
+```
+
+---
+
+## ⚙️ Installation & Setup Guide
 
 ### **1. Prerequisites**
 - [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-- [Node.js (v18+)](https://nodejs.org/)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [Node.js (v18+)](https://nodejs.org/) & npm
+- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) or LocalDB
 
-### **2. Backend Setup**
+### **2. Database Setup**
+Update the connection string in `Backend/CineReserve/CineReserve.API/appsettings.json` to point to your local SQL Server instance.
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=YOUR_SERVER;Database=CineReserveDb;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False"
+}
+```
+
+### **3. Backend Setup**
+Open a terminal and run the following commands to restore dependencies, apply migrations, and start the API:
 ```bash
 cd Backend/CineReserve/CineReserve.API
 dotnet restore
+dotnet ef database update  # Optional if auto-migration is not enabled
 dotnet run
 ```
+*The API will typically start on `https://localhost:7116` or `http://localhost:5249`. A Swagger UI is available at `/swagger` for API exploration.*
 
-### **3. Frontend Setup**
+### **4. Frontend Setup**
+Open a separate terminal and run:
 ```bash
 cd Frontend/CineReserve
 npm install
-ng serve
+npm start
 ```
-Visit `http://localhost:4200` to see the magic happen! ✨
+*Visit `http://localhost:4200` in your browser to experience CineReserve.*
 
 ---
 
-## 📸 Screenshots
+## 📸 Application Previews
 
 | User Dashboard | Admin Console | Seat Selection |
 | :---: | :---: | :---: |
 | ![User View](https://placehold.co/300x200/2563eb/white?text=User+UI) | ![Admin View](https://placehold.co/300x200/0f172a/white?text=Admin+Dashboard) | ![Seats](https://placehold.co/300x200/1e293b/white?text=Interactive+Seats) |
 
----
-
-## 🏗️ Project Architecture
-
-CineReserve follows a clean, **Layered Architecture**:
-- **API**: ASP.NET Core Web API Controllers & Middleware.
-- **Application**: DTOs, Mapping Profiles, and Service Interfaces.
-- **Infrastructure**: Entity Framework Core implementation, Data Context, and External Services.
-- **Domain**: Core Entities and Business Rules.
+*(Note: Replace placeholder images with actual high-quality screenshots before final presentation)*
 
 ---
 
@@ -84,5 +131,5 @@ This project is licensed under the **MIT License**.
 ---
 
 <p align="center">
-  Made with ❤️ by the CineReserve Team
+  Crafted with passion by the <strong>CineReserve Team</strong> for the Hackathon Evaluation.
 </p>
