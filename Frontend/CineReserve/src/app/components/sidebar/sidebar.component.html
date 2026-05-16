@@ -1,0 +1,44 @@
+<div class="sidebar d-flex flex-column bg-white border-end h-100 shadow-sm">
+  <div class="p-4 border-bottom d-none d-lg-block">
+    <a routerLink="/" class="navbar-brand fw-bold text-primary fs-4">
+      <i class="bi bi-ticket-perforated-fill me-2"></i>CineReserve
+    </a>
+  </div>
+  
+  <div class="sidebar-content flex-grow-1 p-3 mt-3">
+    <div class="nav flex-column gap-2">
+      <a routerLink="/" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="bi bi-house-door-fill me-3"></i> Home
+      </a>
+      <a routerLink="/movies" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active">
+        <i class="bi bi-film me-3"></i> Explore Movies
+      </a>
+      
+      <div class="mt-4 mb-2 ms-3 text-uppercase small fw-bold text-muted" *ngIf="user$ | async">Your Account</div>
+      
+      <a routerLink="/dashboard" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" *ngIf="user$ | async">
+        <i class="bi bi-grid-fill me-3"></i> Dashboard
+      </a>
+      <a routerLink="/profile" class="nav-link d-flex align-items-center rounded-3 p-3 text-secondary" routerLinkActive="active" *ngIf="user$ | async">
+        <i class="bi bi-person-fill me-3"></i> Profile
+      </a>
+    </div>
+  </div>
+
+  <div class="p-4 border-top" *ngIf="user$ | async as user">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-3">
+        <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+          {{ user.fullName.charAt(0) }}
+        </div>
+        <div class="overflow-hidden">
+          <p class="mb-0 fw-bold small text-truncate">{{ user.fullName }}</p>
+          <p class="mb-0 text-muted extra-small">Member Since 2026</p>
+        </div>
+      </div>
+      <button class="btn btn-link text-danger p-0" (click)="logout()" title="Logout">
+        <i class="bi bi-box-arrow-right fs-5"></i>
+      </button>
+    </div>
+  </div>
+</div>

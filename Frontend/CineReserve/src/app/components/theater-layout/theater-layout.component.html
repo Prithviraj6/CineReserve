@@ -1,0 +1,99 @@
+<div class="container mt-5 py-4">
+  <div class="row">
+    <!-- Main Theater Area -->
+    <div class="col-lg-8">
+      <div class="d-flex align-items-center mb-5">
+        <button class="btn btn-light btn-sm rounded-circle me-3" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div>
+          <h2 class="fw-bold mb-0">Select Your Seats</h2>
+          <p class="text-muted mb-0 small" *ngIf="!loading">{{ showtime?.movieTitle }} · {{ showtime?.theaterHallName }}</p>
+        </div>
+      </div>
+      
+      <div class="theater-canvas bg-white rounded-4 shadow-sm p-5 mb-4 border border-light">
+        <div class="screen-container mb-5 mx-auto">
+          <div class="screen"></div>
+          <p class="text-center text-muted small mt-3 fw-bold tracking-widest">SCREEN THIS WAY</p>
+        </div>
+
+        <div *ngIf="loading" class="text-center my-5 py-5">
+          <div class="spinner-border text-primary" role="status"></div>
+        </div>
+
+        <div class="seats-matrix d-flex flex-column align-items-center" *ngIf="!loading">
+          <div class="seat-row d-flex align-items-center mb-2" *ngFor="let row of rows">
+            <div class="row-label me-3 small fw-bold text-muted">{{ row }}</div>
+            <div class="d-flex gap-2">
+              <div *ngFor="let seat of getSeatsInRow(row)" 
+                   class="seat" 
+                   [ngClass]="{
+                     'available': seat.isAvailable,
+                     'selected': isSelected(seat.seatId),
+                     'sold': !seat.isAvailable,
+                     'vip': seat.seatType === 'VIP'
+                   }"
+                   (click)="toggleSeat(seat)"
+                   [title]="'Seat ' + seat.rowLabel + seat.seatNumber + ' (' + seat.seatType + ')'">
+                <span class="seat-num">{{ seat.seatNumber }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="d-flex justify-content-center flex-wrap gap-4 mt-5 pt-4 border-top border-light">
+          <div class="d-flex align-items-center small"><div class="legend-box available me-2"></div> Available</div>
+          <div class="d-flex align-items-center small"><div class="legend-box selected me-2"></div> Selected</div>
+          <div class="d-flex align-items-center small"><div class="legend-box sold me-2"></div> Sold</div>
+          <div class="d-flex align-items-center small"><div class="legend-box vip me-2"></div> VIP Area</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Sidebar -->
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm sticky-top" style="top: 2rem;">
+        <div class="card-header bg-white p-4 border-0">
+          <h5 class="fw-bold mb-0">Booking Details</h5>
+        </div>
+        <div class="card-body p-4 pt-0">
+          <div *ngIf="selectedSeats.length === 0" class="text-center text-muted py-5 border-2 border-dashed rounded-3 mb-4">
+            <i class="bi bi-hand-index-thumb d-block h2 mb-2"></i>
+            <p class="mb-0">Please select seats from the layout</p>
+          </div>
+          
+          <div *ngIf="selectedSeats.length > 0">
+            <div class="selected-seats-list mb-4">
+              <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light" 
+                   *ngFor="let seat of selectedSeats">
+                <div>
+                  <span class="fw-bold">Row {{ seat.rowLabel }} - Seat {{ seat.seatNumber }}</span>
+                  <div class="text-muted small">{{ seat.seatType }} Seat</div>
+                </div>
+                <div class="fw-bold">₹{{ seat.price }}</div>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <span class="text-muted fw-medium">Total Amount</span>
+              <h3 class="fw-bold text-primary mb-0">₹{{ getTotalPrice() }}</h3>
+            </div>
+            
+            <div *ngIf="error" class="alert alert-danger mb-4 small">{{ error }}</div>
+            
+            <button class="btn btn-primary w-100 py-3 fw-bold shadow-sm" 
+                    [disabled]="bookingInProgress"
+                    (click)="confirmBooking()">
+              {{ bookingInProgress ? 'Processing...' : 'Confirm My Booking' }}
+            </button>
+            <p class="text-center text-muted small mt-3">
+              <i class="bi bi-shield-check me-1"></i> Secure payment with wallet
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

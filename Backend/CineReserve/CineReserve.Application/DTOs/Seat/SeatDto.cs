@@ -8,5 +8,7 @@ namespace CineReserve.Application.DTOs.Seat
         public string SeatType { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public bool IsAvailable { get; set; }
+        public string MovieTitle { get; set; } = string.Empty;
+        public string TheaterHallName { get; set; } = string.Empty;
     }
 }

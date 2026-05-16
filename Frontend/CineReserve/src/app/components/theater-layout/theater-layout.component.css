@@ -1,0 +1,83 @@
+.theater-canvas {
+  overflow-x: auto;
+}
+
+.screen-container {
+  width: 80%;
+  perspective: 500px;
+}
+
+.screen {
+  height: 12px;
+  background: linear-gradient(to bottom, #cbd5e1, #f8fafc);
+  border-radius: 50% / 100% 100% 0 0;
+  box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.15);
+  transform: rotateX(-15deg);
+}
+
+.tracking-widest { letter-spacing: 0.3em; }
+
+.seat {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.available {
+  background-color: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.available:hover {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+  transform: scale(1.1);
+}
+
+.selected {
+  background-color: #2563eb !important;
+  color: white !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+  transform: scale(1.1);
+}
+
+.sold {
+  background-color: #f8fafc;
+  color: #cbd5e1;
+  border: 1px solid #f1f5f9;
+  cursor: not-allowed;
+}
+
+.vip {
+  border-color: #fbbf24;
+}
+
+.vip.available {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.legend-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+.legend-box.available { background-color: #f1f5f9; border: 1px solid #e2e8f0; }
+.legend-box.selected { background-color: #2563eb; }
+.legend-box.sold { background-color: #f8fafc; border: 1px solid #f1f5f9; }
+.legend-box.vip { background-color: #fef3c7; border: 1px solid #fbbf24; }
+
+.border-dashed {
+  border: 2px dashed #e2e8f0 !important;
+}

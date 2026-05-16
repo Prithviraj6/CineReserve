@@ -41,6 +41,7 @@ namespace CineReserve.Infrastruture.Extensions
             services.AddScoped<IBookingService, BookingService>();
             services.AddScoped<ISeatService, SeatService>();
             services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             // AutoMapper

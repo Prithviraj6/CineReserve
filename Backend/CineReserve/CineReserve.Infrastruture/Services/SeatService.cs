@@ -49,7 +49,9 @@ namespace CineReserve.Infrastruture.Services
                     SeatNumber = seat.SeatNumber,
                     SeatType = seat.SeatType.ToString(),
                     Price = showtime.BasePrice * multiplier,
-                    IsAvailable = !soldSeatIds.Contains(seat.Id)
+                    IsAvailable = !soldSeatIds.Contains(seat.Id),
+                    MovieTitle = showtime.Movie.Title,
+                    TheaterHallName = showtime.TheaterHall.Name
                 };
             });
 

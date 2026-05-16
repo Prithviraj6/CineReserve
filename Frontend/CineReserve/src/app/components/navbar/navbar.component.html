@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top py-3">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" routerLink="/">
+       CineReserve
+    </a>
+    
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/" routerLinkActive="text-primary fw-bold" [routerLinkActiveOptions]="{exact: true}">Movies</a>
+        </li>
+        
+        <ng-container *ngIf="user$ | async as user; else guest">
+          <li class="nav-item ms-lg-3 me-3">
+            <span class="text-success fw-bold">
+              ₹{{ user.creditBalance }}
+            </span>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link px-3" routerLink="/dashboard" routerLinkActive="text-primary fw-bold">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-danger btn-sm px-3" (click)="logout()">Logout</button>
+          </li>
+        </ng-container>
+        
+        <ng-template #guest>
+          <li class="nav-item ms-lg-3">
+            <a routerLink="/login" class="btn btn-link text-decoration-none text-dark px-3">Login</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/register" class="btn btn-primary px-4 shadow-sm">Register</a>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>

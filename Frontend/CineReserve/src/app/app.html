@@ -1,0 +1,23 @@
+<div class="d-flex min-vh-100 bg-light">
+  <!-- Sidebar (Hidden on Landing/Auth) -->
+  <app-sidebar class="d-none d-md-block" *ngIf="!hideSidebar"></app-sidebar>
+
+  <!-- Main Content Area -->
+  <div class="flex-grow-1 d-flex flex-column overflow-hidden" [class.ps-sidebar]="!hideSidebar">
+    <!-- Page Content -->
+    <main class="flex-grow-1 overflow-auto">
+      <router-outlet></router-outlet>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-white border-top py-4 text-center text-muted small" *ngIf="!hideSidebar">
+      <div class="container">
+        <p class="mb-1">&copy; 2026 CineReserve. All rights reserved.</p>
+        <div class="d-flex justify-content-center gap-3">
+          <a href="#" class="text-decoration-none text-muted">Privacy Policy</a>
+          <a href="#" class="text-decoration-none text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

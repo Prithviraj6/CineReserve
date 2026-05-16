@@ -1,0 +1,9 @@
+.ps-sidebar {
+  padding-left: 280px;
+}
+
+@media (max-width: 991.98px) {
+  .ps-sidebar {
+    padding-left: 80px;
+  }
+}

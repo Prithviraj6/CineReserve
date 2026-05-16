@@ -1,0 +1,19 @@
+.showtime-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.showtime-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.hall-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #eff6ff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}

@@ -1,0 +1,52 @@
+.hero-section {
+  min-height: 70vh;
+  background: radial-gradient(circle at top right, #eff6ff 0%, transparent 40%),
+              radial-gradient(circle at bottom left, #f5f3ff 0%, transparent 40%);
+}
+
+.icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+}
+
+.feature-card {
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.animate-up { animation: slideUp 0.8s ease-out; }
+.animate-up-delay { animation: slideUp 0.8s ease-out 0.2s both; }
+.animate-up-delay-2 { animation: slideUp 0.8s ease-out 0.4s both; }
+.animate-down { animation: slideDown 0.8s ease-out; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.landing-footer {
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.landing-footer i {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.landing-footer i:hover {
+  color: #2563eb !important;
+}

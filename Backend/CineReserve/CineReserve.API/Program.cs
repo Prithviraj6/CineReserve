@@ -1,7 +1,5 @@
 using CineReserve.API.Middleware;
-using CineReserve.Infrastruture.Data;
 using CineReserve.Infrastruture.Extensions;
-using CineReserve.Infrastruture.Seed;
 using FluentValidation;
 using System.Reflection;
 using Microsoft.OpenApi;
