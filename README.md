@@ -118,22 +118,6 @@ npm start
 
 ---
 
-## 📸 Application Previews
-
-| User Dashboard | Admin Console | Seat Selection |
-| :---: | :---: | :---: |
-| ![User View](https://placehold.co/300x200/2563eb/white?text=User+UI) | ![Admin View](https://placehold.co/300x200/0f172a/white?text=Admin+Dashboard) | ![Seats](https://placehold.co/300x200/1e293b/white?text=Interactive+Seats) |
-
-*(Add high-quality screenshots here to showcase the platform's UI/UX)*
-
----
-
 ## 🛡️ License
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
-
----
-
-<p align="center">
-  Crafted with ❤️ by Prithviraj
-</p>
