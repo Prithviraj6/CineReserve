@@ -1,3 +1,4 @@
+using CineReserve.Application.Common;
 using CineReserve.Application.DTOs.ShowTime;
 using CineReserve.Application.DTOs.TheaterHall;
 
