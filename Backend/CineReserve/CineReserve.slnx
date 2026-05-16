@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CineReserve.API/CineReserve.API.csproj" />
+  <Project Path="CineReserve.Application/CineReserve.Application.csproj" />
+  <Project Path="CineReserve.Domain/CineReserve.Domain.csproj" />
+</Solution>
