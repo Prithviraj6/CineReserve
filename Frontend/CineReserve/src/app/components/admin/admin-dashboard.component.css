@@ -1,0 +1,173 @@
+.table thead th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  font-weight: 700;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.table tbody td {
+  padding: 1.25rem 0.75rem;
+  color: #334155;
+}
+
+.btn-outline-info:hover {
+  background-color: #0ea5e9;
+  color: #fff;
+}
+
+.btn-outline-danger:hover {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.modal-backdrop {
+  background-color: rgba(15, 23, 42, 0.5);
+}
+
+.modal-content {
+  background-color: #ffffff;
+}
+
+.form-control {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.form-control:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn-action {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.btn-calendar:hover {
+  background: #eff6ff;
+  color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1);
+}
+
+.btn-delete:hover {
+  background: #fef2f2;
+  color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.1);
+}
+
+.extra-small {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+}
+
+.delete-icon {
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.delete-icon:hover {
+  opacity: 1;
+}
+
+.italic { font-style: italic; }
+
+/* Refined Input Styling */
+input[type="datetime-local"],
+input[type="number"] {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: #1e293b;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
+}
+
+.input-group-text {
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Hide Spin Buttons */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.input-group:focus-within .input-group-text {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.input-group:focus-within input {
+  border-left-color: transparent !important;
+}
+
+.custom-input-group {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.custom-input-group .input-group-text {
+  border: none;
+  padding-right: 0.5rem;
+}
+
+.custom-input-group .form-control {
+  border: none;
+  padding-left: 0.5rem;
+}
+
+.custom-input-group:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.custom-input-group:focus-within .input-group-text {
+  color: #2563eb;
+}
+
+/* Custom Calendar Picker Styling */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(36%) sepia(98%) saturate(1966%) hue-rotate(211deg) brightness(98%) contrast(93%); /* Matches Bootstrap Primary Blue */
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator,
+input[type="time"]:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}
+
+.custom-input-group input {
+  cursor: pointer;
+}
+

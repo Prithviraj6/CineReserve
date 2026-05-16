@@ -18,6 +18,7 @@ export class LoginComponent {
   loading = false;
   error = '';
   returnUrl: string = '/movies';
+  showPassword = false;
 
   constructor(
     private apiService: ApiService, 
@@ -36,7 +37,16 @@ export class LoginComponent {
       next: (res: any) => {
         const userData = res.data || res;
         this.authService.setSession(userData);
-        this.router.navigateByUrl(this.returnUrl);
+        
+        // If we have a specific returnUrl (from AuthGuard), go there.
+        // Otherwise, admins go to /admin and users go to /movies.
+        if (this.returnUrl !== '/movies') {
+          this.router.navigateByUrl(this.returnUrl);
+        } else if (userData.role === 'Admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/movies']);
+        }
       },
       error: (err) => {
         this.error = err.error?.message || 'Login failed';

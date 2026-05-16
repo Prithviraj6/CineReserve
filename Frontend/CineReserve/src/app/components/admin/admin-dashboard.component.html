@@ -1,0 +1,221 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h2 class="display-6 fw-bold mb-1">Admin Dashboard</h2>
+      <p class="text-muted mb-0">Manage movie catalog and showtimes</p>
+    </div>
+    <button class="btn btn-primary rounded-pill px-4" (click)="showAddModal = true">
+      <i class="bi bi-plus-lg me-2"></i>Add New Movie
+    </button>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm p-4 bg-white rounded-4">
+        <p class="text-muted small fw-bold text-uppercase mb-1">Total Movies</p>
+        <h2 class="fw-bold mb-0 text-primary">{{ movies.length }}</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm p-4 bg-white rounded-4">
+        <p class="text-muted small fw-bold text-uppercase mb-1">Active Showtimes</p>
+        <h2 class="fw-bold mb-0 text-success">24</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm p-4 bg-white rounded-4">
+        <p class="text-muted small fw-bold text-uppercase mb-1">System Health</p>
+        <h2 class="fw-bold mb-0 text-info">99.9%</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Movies Table -->
+  <div class="card border-0 shadow-sm overflow-hidden bg-white rounded-4">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th class="ps-4 py-3">Movie</th>
+            <th class="py-3">Genre</th>
+            <th class="py-3">Duration</th>
+            <th class="py-3">Language</th>
+            <th class="py-3 text-end pe-4">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movies">
+            <td class="ps-4">
+              <div class="d-flex align-items-center">
+                <img [src]="movie.posterUrl || 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=100'" 
+                     class="rounded me-3" style="width: 40px; height: 50px; object-fit: cover;">
+                <span class="fw-bold">{{ movie.title }}</span>
+              </div>
+            </td>
+            <td><span class="badge bg-secondary-subtle text-secondary">{{ movie.genre }}</span></td>
+            <td>{{ movie.durationMinutes }}m</td>
+            <td>{{ movie.language }}</td>
+            <td class="text-end pe-4">
+              <button class="btn-action btn-calendar me-2" (click)="manageShowtimes(movie)" title="Manage Showtimes">
+                <i class="bi bi-calendar3"></i>
+              </button>
+              <button class="btn-action btn-delete" (click)="deleteMovie(movie.id)" title="Delete Movie">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="loading">
+            <td colspan="5" class="text-center py-5">
+              <div class="spinner-border text-primary" role="status"></div>
+            </td>
+          </tr>
+          <tr *ngIf="!loading && movies.length === 0">
+            <td colspan="5" class="text-center py-5 text-muted">No movies found in catalog.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Manage Showtimes Modal -->
+  <div class="modal-backdrop fade show" *ngIf="showTimeModal"></div>
+  <div class="modal fade show d-block" *ngIf="showTimeModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header border-0 p-4 bg-primary text-white">
+          <div>
+            <h5 class="modal-title fw-bold mb-0">Manage Showtimes</h5>
+            <p class="text-white text-opacity-75 small mb-0">{{ selectedMovie?.title }}</p>
+          </div>
+          <button type="button" class="btn-close btn-close-white" (click)="showTimeModal = false"></button>
+        </div>
+        <div class="modal-body p-4 bg-light bg-opacity-50">
+          <!-- Add Showtime Section -->
+          <div class="card border-0 shadow-sm mb-4 rounded-3 overflow-hidden">
+            <div class="card-header bg-white py-3 border-bottom-0">
+              <h6 class="fw-bold mb-0"><i class="bi bi-plus-circle me-2 text-primary"></i>Schedule New Show</h6>
+            </div>
+            <div class="card-body p-4 pt-0">
+              <form (ngSubmit)="addShowtime()">
+                <div class="row g-3 align-items-end">
+                  <div class="col-md-4">
+                    <label class="form-label small fw-bold text-muted">Show Date</label>
+                    <div class="input-group custom-input-group">
+                      <span class="input-group-text bg-white"><i class="bi bi-calendar-event"></i></span>
+                      <input type="date" class="form-control" [(ngModel)]="newShowDate" name="showDate" required>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label small fw-bold text-muted">Start Time</label>
+                    <div class="input-group custom-input-group">
+                      <span class="input-group-text bg-white"><i class="bi bi-clock"></i></span>
+                      <input type="time" class="form-control" [(ngModel)]="newShowTime" name="showTime" required>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label small fw-bold text-muted">Price</label>
+                    <div class="input-group custom-input-group">
+                      <span class="input-group-text bg-white fw-bold small">₹</span>
+                      <input type="number" class="form-control" [(ngModel)]="newShowtime.basePrice" name="basePrice" required>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm">
+                      <i class="bi bi-plus-lg me-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Current Showtimes Section -->
+          <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white py-3 border-bottom-0 d-flex justify-content-between align-items-center">
+              <h6 class="fw-bold mb-0"><i class="bi bi-list-ul me-2 text-primary"></i>Current Schedule</h6>
+              <span class="badge bg-primary-subtle text-primary rounded-pill">{{ movieShowtimes.length }} Shows</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="bg-light bg-opacity-50">
+                    <tr>
+                      <th class="ps-4 py-2 extra-small text-muted text-uppercase">Date & Time</th>
+                      <th class="py-2 extra-small text-muted text-uppercase">Ticket Price</th>
+                      <th class="text-end pe-4 py-2 extra-small text-muted text-uppercase">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let st of movieShowtimes">
+                      <td class="ps-4">
+                        <div class="fw-bold">{{ st.startTimeUtc | date:'MMM d, y' }}</div>
+                        <div class="text-muted small">{{ st.startTimeUtc | date:'h:mm a' }}</div>
+                      </td>
+                      <td>
+                        <span class="fw-bold text-success">₹{{ st.basePrice }}</span>
+                      </td>
+                      <td class="text-end pe-4">
+                        <button class="btn btn-link text-danger p-0 delete-icon" (click)="deleteShowtime(st.id)" title="Delete Showtime">
+                          <i class="bi bi-trash3-fill fs-5"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr *ngIf="movieShowtimes.length === 0">
+                      <td colspan="3" class="text-center py-5 text-muted small italic">
+                        <i class="bi bi-calendar-x d-block fs-2 mb-2 opacity-25"></i>
+                        No showtimes scheduled for this movie yet.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple Add Movie Modal (Overlay) -->
+  <div class="modal-backdrop fade show" *ngIf="showAddModal"></div>
+  <div class="modal fade show d-block" *ngIf="showAddModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-0 p-4">
+          <h5 class="modal-title fw-bold">Add New Movie</h5>
+          <button type="button" class="btn-close" (click)="showAddModal = false"></button>
+        </div>
+        <div class="modal-body p-4 pt-0">
+          <form (ngSubmit)="addMovie()">
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Title</label>
+              <input type="text" class="form-control" [(ngModel)]="newMovie.title" name="title" required>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label class="form-label small fw-bold">Genre</label>
+                <input type="text" class="form-control" [(ngModel)]="newMovie.genre" name="genre" required>
+              </div>
+              <div class="col">
+                <label class="form-label small fw-bold">Duration (Min)</label>
+                <input type="number" class="form-control" [(ngModel)]="newMovie.durationMinutes" name="duration" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Poster URL</label>
+              <input type="text" class="form-control" [(ngModel)]="newMovie.posterUrl" name="posterUrl">
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Description</label>
+              <textarea class="form-control" rows="3" [(ngModel)]="newMovie.description" name="description"></textarea>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary py-2 rounded-pill fw-bold">Add Movie</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

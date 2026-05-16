@@ -6,6 +6,7 @@ import { TheaterLayoutComponent } from './components/theater-layout/theater-layo
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard.component';
 import { authGuard } from './interceptors/auth.guard';
 
 export const routes: Routes = [
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'movies', component: HomeComponent, canActivate: [authGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'admin', component: AdminDashboardComponent, canActivate: [authGuard] },
     { path: 'showtimes/:movieId', component: ShowtimesComponent, canActivate: [authGuard] },
     { path: 'seats/:showtimeId', component: TheaterLayoutComponent, canActivate: [authGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },

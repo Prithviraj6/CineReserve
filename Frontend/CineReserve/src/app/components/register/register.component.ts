@@ -18,6 +18,7 @@ export class RegisterComponent {
   password = '';
   loading = false;
   error = '';
+  showPassword = false;
 
   constructor(
     private apiService: ApiService, 

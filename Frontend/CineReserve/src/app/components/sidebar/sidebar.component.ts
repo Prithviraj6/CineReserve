@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 export class SidebarComponent {
   user$: Observable<any>;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
     this.user$ = this.authService.currentUser$;
   }
 

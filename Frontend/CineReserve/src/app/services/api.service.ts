@@ -30,9 +30,25 @@ export class ApiService {
     return this.http.get<{ data: Movie[] }>(`${this.baseUrl}/Movies`);
   }
 
+  createMovie(movie: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Movies`, movie);
+  }
+
+  deleteMovie(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/Movies/${id}`);
+  }
+
   // Showtimes
   getShowtimes(movieId: number): Observable<{ data: ShowTime[] }> {
     return this.http.get<{ data: ShowTime[] }>(`${this.baseUrl}/Showtimes?movieId=${movieId}`);
+  }
+
+  createShowtime(showtime: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Showtimes`, showtime);
+  }
+
+  deleteShowtime(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/Showtimes/${id}`);
   }
 
   // Seats
