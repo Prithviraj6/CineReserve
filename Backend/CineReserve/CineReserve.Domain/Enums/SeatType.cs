@@ -4,7 +4,9 @@ using System.Text;
 
 namespace CineReserve.Domain.Enums
 {
-    internal class SeatType
+    public enum SeatType
     {
+        Regular = 1,
+        VIP = 2
     }
 }

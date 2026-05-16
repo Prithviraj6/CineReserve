@@ -4,7 +4,9 @@ using System.Text;
 
 namespace CineReserve.Domain.Enums
 {
-    internal class UserRole
+    public enum UserRole
     {
+        User = 1,
+        Admin = 2
     }
 }

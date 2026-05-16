@@ -1,5 +1,11 @@
 <Solution>
-  <Project Path="CineReserve.API/CineReserve.API.csproj" />
-  <Project Path="CineReserve.Application/CineReserve.Application.csproj" />
-  <Project Path="CineReserve.Domain/CineReserve.Domain.csproj" />
+  <Folder Name="/src/">
+    <Project Path="CineReserve.API/CineReserve.API.csproj" />
+    <Project Path="CineReserve.Application/CineReserve.Application.csproj" />
+    <Project Path="CineReserve.Domain/CineReserve.Domain.csproj" />
+    <Project Path="CineReserve.Infrastruture/CineReserve.Infrastruture.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="CineReserve.Tests/CineReserve.Tests.csproj" />
+  </Folder>
 </Solution>
