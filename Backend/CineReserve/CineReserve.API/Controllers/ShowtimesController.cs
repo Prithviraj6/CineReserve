@@ -9,11 +9,11 @@ namespace CineReserve.API.Controllers
     [Route("api/[controller]")]
     public class ShowtimesController : ControllerBase
     {
-        private readonly IShowtimeService _showtimeService;
+        private readonly IScheduleService _scheduleService;
 
-        public ShowtimesController(IShowtimeService showtimeService)
+        public ShowtimesController(IScheduleService scheduleService)
         {
-            _showtimeService = showtimeService;
+            _scheduleService = scheduleService;
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace CineReserve.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetByMovie([FromQuery] int movieId)
         {
-            var result = await _showtimeService.GetShowtimesByMovieIdAsync(movieId);
+            var result = await _scheduleService.GetShowtimesByMovieIdAsync(movieId);
             return StatusCode(result.StatusCode, result);
         }
 
@@ -33,7 +33,7 @@ namespace CineReserve.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateShowTimeDto request)
         {
-            var result = await _showtimeService.CreateShowtimeAsync(request);
+            var result = await _scheduleService.CreateShowtimeAsync(request);
             return StatusCode(result.StatusCode, result);
         }
 
@@ -44,7 +44,18 @@ namespace CineReserve.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _showtimeService.DeleteShowtimeAsync(id);
+            var result = await _scheduleService.DeleteShowtimeAsync(id);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        /// <summary>
+        /// Get all theater halls (Admin only).
+        /// </summary>
+        [HttpGet("halls")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetHalls()
+        {
+            var result = await _scheduleService.GetAllTheaterHallsAsync();
             return StatusCode(result.StatusCode, result);
         }
     }

@@ -13,11 +13,11 @@ import { Movie } from '../../models/api.models';
 })
 export class AdminDashboardComponent implements OnInit {
   movies: Movie[] = [];
-  loading = true;
+  movieShowtimes: any[] = [];
+  loading = false;
   showAddModal = false;
   showTimeModal = false;
-  selectedMovie: Movie | null = null;
-  movieShowtimes: any[] = [];
+  selectedMovie: any = null;
 
   newMovie = {
     title: '',
@@ -32,19 +32,20 @@ export class AdminDashboardComponent implements OnInit {
   newShowtime = {
     movieId: 0,
     theaterHallId: 1,
+    startTimeUtc: '',
     basePrice: 250
   };
 
-  newShowDate = new Date().toISOString().split('T')[0];
-  newShowTime = '18:00';
+  newShowDate = '';
+  newShowTime = '';
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.loadMovies();
+    this.fetchMovies();
   }
 
-  loadMovies() {
+  fetchMovies() {
     this.loading = true;
     this.apiService.getMovies().subscribe({
       next: (res) => {
@@ -53,6 +54,10 @@ export class AdminDashboardComponent implements OnInit {
       },
       error: () => this.loading = false
     });
+  }
+
+  loadMovies() {
+    this.fetchMovies();
   }
 
   deleteMovie(id: number) {

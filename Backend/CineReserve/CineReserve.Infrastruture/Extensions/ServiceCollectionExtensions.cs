@@ -37,7 +37,7 @@ namespace CineReserve.Infrastruture.Extensions
             // Services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IMovieService, MovieService>();
-            services.AddScoped<IShowtimeService, ShowtimeService>();
+            services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<IBookingService, BookingService>();
             services.AddScoped<ISeatService, SeatService>();
             services.AddScoped<IAdminService, AdminService>();

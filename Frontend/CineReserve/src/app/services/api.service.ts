@@ -51,6 +51,10 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/Showtimes/${id}`);
   }
 
+  getTheaterHalls(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Showtimes/halls`);
+  }
+
   // Seats
   getSeats(showtimeId: number): Observable<{ data: Seat[] }> {
     return this.http.get<{ data: Seat[] }>(`${this.baseUrl}/Seats/${showtimeId}`);

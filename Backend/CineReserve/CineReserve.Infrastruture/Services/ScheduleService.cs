@@ -1,20 +1,21 @@
 using AutoMapper;
 using CineReserve.Application.Common;
 using CineReserve.Application.DTOs.ShowTime;
+using CineReserve.Application.DTOs.TheaterHall;
 using CineReserve.Application.Interfaces.Repositories;
 using CineReserve.Application.Interfaces.Services;
 using CineReserve.Domain.Entities;
 
 namespace CineReserve.Infrastruture.Services
 {
-    public class ShowtimeService : IShowtimeService
+    public class ScheduleService : IScheduleService
     {
         private readonly IShowtimeRepository _showtimeRepo;
         private readonly IMovieRepository _movieRepo;
         private readonly ITheaterHallRepository _hallRepo;
         private readonly IMapper _mapper;
 
-        public ShowtimeService(
+        public ScheduleService(
             IShowtimeRepository showtimeRepo,
             IMovieRepository movieRepo,
             ITheaterHallRepository hallRepo,
@@ -70,6 +71,13 @@ namespace CineReserve.Infrastruture.Services
             await _showtimeRepo.SaveChangesAsync();
 
             return ApiResponse<bool>.SuccessResponse(true, "Showtime deleted");
+        }
+
+        public async Task<ApiResponse<IEnumerable<TheaterHallDto>>> GetAllTheaterHallsAsync()
+        {
+            var halls = await _hallRepo.GetAllAsync();
+            var dtos = _mapper.Map<IEnumerable<TheaterHallDto>>(halls);
+            return ApiResponse<IEnumerable<TheaterHallDto>>.SuccessResponse(dtos);
         }
     }
 }
